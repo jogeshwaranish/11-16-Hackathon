@@ -3,6 +3,7 @@
 package com.example.kotlin_124_honors
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -20,10 +21,27 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kotlin_124_honors.ui.theme.Kotlin124honorsTheme
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
 
 class MainActivity : ComponentActivity() {
+
+    private val logTag = MainActivity::class.java.simpleName
+
+    private fun readFireStore() {
+        val db = Firebase.firestore
+        db.collection("responses").document("danger").collection("response1")
+            .get()
+            .addOnSuccessListener {
+                for (document in it) {
+                    Log.d(logTag, document.data.getValue("message").toString())
+                }
+            }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        readFireStore()
         enableEdgeToEdge()
         setContent {
             Kotlin124honorsTheme {
