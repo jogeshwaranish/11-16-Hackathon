@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AppTopBar() {
     TopAppBar(
-        title = { Text("Kotlin 124 Honors", color = Color.White) },
+        title = { Text("AccountaBuddy", color = Color.White) },
         colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.primary)
     )
 }
@@ -79,6 +79,10 @@ fun StartScreenContent(modifier: Modifier = Modifier) {
         )
     }
 }
+@Composable
+fun StartCalendar() {
+
+}
 
 @Preview(showBackground = true)
 @Composable
@@ -88,6 +92,7 @@ fun StartScreenPreview() {
             topBar = { AppTopBar() }
         ) {
             StartScreenContent(modifier = Modifier.padding(it))
+            StartCalendar()
         }
     }
 }
