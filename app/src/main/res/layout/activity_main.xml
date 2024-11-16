@@ -4,15 +4,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/notifyButton"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send Notification"
-        android:layout_constraintTop_toTopOf="parent"
-        android:layout_constraintStart_toStartOf="parent"
-        android:layout_constraintEnd_toEndOf="parent"
-        android:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="94dp"
+        android:text="Are You Procrastinating?"
+        android:textSize="35sp" />
 
+    <TextView
+        android:id="@+id/subText"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="15dp"
+        android:text="Press the button for motivation!"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/not_studying_working" />
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="388dp"
+        android:layout_height="56dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="@string/press_the_button_for_motivation"
+        android:textAlignment="center"
+        android:textSize="20sp" />
 
 </LinearLayout>

@@ -4,9 +4,10 @@ package com.example.kotlin_124_honors
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View.OnClickListener
+import android.widget.Button
+import android.widget.TextView
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -23,37 +24,28 @@ import androidx.compose.ui.unit.sp
 import com.example.kotlin_124_honors.ui.theme.Kotlin124honorsTheme
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
+import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
 
     private val logTag = MainActivity::class.java.simpleName
 
-    private fun readFireStore() {
-        val db = Firebase.firestore
-        db.collection("responses").document("danger").collection("response1")
-            .get()
-            .addOnSuccessListener {
-                for (document in it) {
-                    Log.d(logTag, document.data.getValue("message").toString())
-                }
-            }
+    private val stringList = mutableListOf("Go do your work", "WORKWORKWORKWORK", "I know your not doing your work", "Your mother would not be proud", "Your literally bad", "Come on you can do better", "Yikes you suck", "How lame", "Really? No work?", "Even I could do better than you", "Skill issue", "Sucker", "Why are you here? Go back to work!", "You can go on your phone later", "lol ur bad")
+
+    private fun readFireStore(): String {
+        return stringList[Random.nextInt(0, stringList.size)]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        readFireStore()
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        setContent {
-            Kotlin124honorsTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    topBar = { AppTopBar() }
-                ) { innerPadding ->
-                    StartScreenContent(modifier = Modifier.padding(innerPadding))
-                }
-            }
+        val resultText = findViewById<TextView>(R.id.resultText)
+        val button = findViewById<Button>(R.id.button)
+        button.setOnClickListener {
+            val message = readFireStore()
+            resultText.text = message
         }
+
     }
 }
 
@@ -61,7 +53,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AppTopBar() {
     TopAppBar(
-        title = { Text("AccountaBuddy", color = Color.White) },
+        title = { Text("Account-a-Buddy", color = Color.White) },
         colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.primary)
     )
 }
@@ -83,7 +75,7 @@ fun StartScreenContent(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = Modifier.height(24.dp))
         Text(
-            text = "Welcome to Kotlin 124 Honors!",
+            text = "Are you procrastinating?",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
@@ -91,7 +83,7 @@ fun StartScreenContent(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = "Explore and learn Kotlin with hands-on projects and engaging content.",
+            text = "Click the button above",
             fontSize = 16.sp,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onBackground
